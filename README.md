@@ -93,6 +93,8 @@ $    ./weather -rain
 
 ## Helpers/Modifiers
 
+*_The Helpers/Modifiers are signified by a double-dash (`--`) argument whereas the single-dash (`-`) arguments refer to the weather/display type_* 
+
 ### `--help` - Display the documentation
 
 ---
