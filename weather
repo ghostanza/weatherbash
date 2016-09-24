@@ -1,0 +1,165 @@
+#!/bin/bash
+
+weather_key=<<YOUR API KEY>>;
+loc=02143;
+api_prefix=http://api.wunderground.com/api/${weather_key}/;
+if [ "$1" == "--help" ]
+then
+    echo -e "\n==========[[ WEATHER BASH HELP ]]==========\n
+This script can be used to quickly check the weather for a given zipcode from the command line. It uses cURL to reach out to the Weather Uderground API to provide information\n
+    DEFAULTS:
+    -> The default location is Somerville, MA
+    -> The default display is a brief overview showing the weather ("Cloudy / Rainy / etc", and the temperature)
+
+    OPTIONS:\n
+    [-s] - Summary (This is the default, you do not need to use the argument)\n
+    [-c] - Complete Forecast\n
+    [-sset] - The time of today's sunset\n
+    [-alerts] - Weather alerts in your area\n
+    [-rain] - Chance of rain in your area (percentage)\n
+    [--z] - specify a zipcode (ex: weather --z)\n
+    [--t] - specify a town/city and state (ex: weather --t)\n
+    [--help] - documentation
+    [--alias][name] - Creates an alias to the script in .bash_profile. Default name is 'weather', but you can specify a name if you'd like by passing a second argument with the name (ex:  ./weather --alias checkweather ). NOTE: You will need to run 'source ~/.bash_profile' after running this command to activate it.
+\n
+    Examples:\n
+    \t $ weather --z
+    \t $ Enter Zip Code:
+    \t $ > 02108
+    \t\t  ===== Boston MA =====
+    \t\t  Light Rain
+    \t\t  58.3 F (14.6 C)
+    \t\t  Feels Like 58.3deg\n
+
+    \t $ weather --t -c
+    \t $ Enter Town/City Name:
+    \t $ > San Francisco
+    \t $ Enter Two-Letter State Abbreviation:
+    \t $ > CA
+    \t\t  ----- FULL FORECAST FOR SAN FRANCISCO -----
+    \t  ===== Friday =====
+    \t  Partly cloudy. Lows overnight in the mid 50s.\n
+    \t  ===== Friday Night =====
+    \t  Partly cloudy skies. Low around 55F. Winds NW at 10 to 20 mph.\n
+    \t  ===== Saturday =====
+    \t  A mainly sunny sky. High 73F. Winds NNE at 5 to 10 mph becoming W and increasing to 10 to 20 mph.\n
+    \t  ===== Saturday Night =====
+    \t  Clear skies. Low near 55F. Winds NNE at 10 to 15 mph.\n
+    \t  ===== Sunday =====
+    \t  Mainly sunny. High 82F. Winds NNE at 10 to 20 mph.\n
+    \t  ===== Sunday Night =====
+    \t  A mostly clear sky. Low around 55F. Winds NW at 10 to 15 mph.\n
+    \t  ===== Monday ======
+    \t  Sunny. High 82F. NE winds shifting to WNW at 10 to 15mph.\n
+    \t  ===== Monday Night =====
+    \t  A mostly clear sky. Low around 55F. Winds W at 5 to 10 mph.\n
+"
+    exit;
+elif [ "$1" == "--z" ] || [ "$2" == "--z" ]
+then
+     echo "Enter Zip Code: "
+     read zip;
+    if [[ "$zip" =~ /[^\d]/g ]];
+    then
+        echo "FAIL:  Invalid Zip Code";
+        exit;
+    else
+        loc=$zip;
+    fi
+elif [[ "$1" == "--t" ]] || [[ "$2" == "--t" ]];
+then
+    echo "Enter Town/City Name: ";
+    read town;
+    echo "Enter Two-Letter State (or Country if not in US) Abbreviation:";
+    read state;
+    loc=$(echo "$state/$town" | sed -e 's@ @_@g');
+fi
+if [ "$1" == "-c" ] || [ "$2" == "-c" ]
+then
+   fulldata=$(curl -s ${api_prefix}forecast/q/${loc}.json | sed -e 's@[",{}]@@g');
+   find_town=$(curl -s ${api_prefix}geolookup/q/${loc}.json | sed -e 's@[",{}]@@g');
+   town=$(echo -e "$find_town" | grep -m1 "city\:" | cut -d ":" -f2 | awk '{print toupper($0)}');
+   echo -e "\n\t----- FULL FORECAST FOR $town -----\n";
+   echo -e "\n$fulldata" | grep "title\|fcttext\:" | while read -r line; do
+      if [[ "$line" =~ "title" ]]
+      then
+         text=$(echo -e "$line" | cut -d ':' -f2); 
+         echo -e "======= $text =======";
+      else
+         text=$(echo -e "$line" | cut -d ':' -f2);
+         echo -e "$text\n";
+      fi
+   done;
+elif [ "$1" = "--alias" ]
+then
+    filename=${BASH_SOURCE[0]};
+    path=$(pwd);
+    if [ -z "$2" ]
+    then
+        found_alias=$( grep 'weather' ~/.bash_profile );
+        if [ -z "$found_alias" ]
+        then
+           echo -e "alias weather=\"/bin/bash ${path}/${filename}\";" >> ~/.bash_profile;
+           echo -e "\n Successfully created alias named 'weather' to bash_profile\n Now just run 'source ~/.bash_profile' to make it official!\n";
+        else
+           echo -e "\nWHOOPS!  It looks like you've already created an alias for this named 'weather'\n";
+           exit;
+        fi
+    else
+        alias_name=$2;
+        found_alias=$( grep ${alias_name} ~/.bash_profile );
+        if [ -z "$found_alias" ]
+        then
+            echo -e "alias ${alias_name}=\"/bin/bash ${path}/${filename}\";" >> ~/.bash_profile;
+            source ~/.bash_profile;
+            echo -e "\n Successfully created an alias named '${alias_name}' to bash_profile\n Now just run 'source ~/.bash_profile' to make it official!\n";
+        else
+            echo -e "\nWHOOPS! It looks like you've already created an alias with the same name [ ${alias_name} ]";
+            exit;
+        fi
+    fi
+elif [ "$1" == "-sset" ] || [ "$2" == "-sset" ]
+then
+    sunrisedata=$(curl -s ${api_prefix}astronomy/q/${loc}.json | sed -e 's@[",{}]@@g');
+    time=$(echo "$sunrisedata" | grep -m2 -A2 sunset );
+    hour=$(echo -e "$time" | grep 'hour:' | cut -d ':' -f2);
+    minute=$(echo -e "$time" | grep 'minute:' | cut -d ':' -f2);
+    if [ "$hour" -gt 12 ]
+    then
+        hour=$(($hour-12));
+    fi
+    echo -e "\n\tSunset today is at $hour:${minute}PM local time\n";
+elif [ "$1" == "-alerts" ] || [ "$2" == "-alerts" ]
+then
+    alerts=$(curl -s ${api_prefix}alerts/q/${loc}.json | sed -e 's@[",{}]@@g' | grep  'description');
+    echo -e "$alerts";
+    if [ -z "$alerts" ]
+    then
+        echo -e "\t There are currently no weather alerts for your area.\n";
+    else
+        echo -e "$alerts" | while read -r alert; do
+            echo -e "$alert\n";
+        done;
+    fi
+elif [ "$1" == "-rain" ] || [ "$2" == "-rain" ]
+then
+    chanceofrain=$(curl -s ${api_prefix}forecast/q/${loc}.json | sed -e 's@[",{}]@@g' | grep -m2 'pop' | cut -d ':' -f2);
+    echo -e "\n\t======= Chance of Rain in Your Area ======="
+   today=$(echo -e "$chanceofrain" | sed -n "1p");
+   tonight=$(echo -e "$chanceofrain" | sed -n "2p");
+   echo -e "\tToday: ${today}%\t\t\tTonight: ${tonight}%\n";
+elif [ ! -z "$1" ] && [[ "$1" != "-s" ]]
+then
+    echo -e "\n\tInvalid argument. Use [--help] to see list of possible options\n";
+else
+   weatherdata=$(curl -s ${api_prefix}conditions/q/${loc}.json | sed -e 's@[",{}]@@g');
+   location=$(echo -e "\n$weatherdata" | grep -m1 full | cut -d ':' -f2);
+   temperature=$(echo -e "\n$weatherdata" | grep -m1 temperature_string | cut -d ':' -f2);
+   feelslike=$(echo -e "\n$weatherdata" | grep -m1 feelslike_f | cut -d ':' -f2);
+   weather=$(echo -e "\n$weatherdata" | grep -m1 weather\: | cut -d ':' -f2);
+
+   echo -e "\n\t======= $location =======\n
+\t$weather\n
+\t$temperature\n
+\tFeels Like ${feelslike}deg\n";
+fi
