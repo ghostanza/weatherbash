@@ -1,6 +1,6 @@
 #!/bin/bash
 
-weather_key=<<YOUR API KEY>>;
+weather_key=YOUR_API_KEY_GOES_HERE;
 loc=02143;
 api_prefix=http://api.wunderground.com/api/${weather_key}/;
 if [ "$1" == "--help" ]
