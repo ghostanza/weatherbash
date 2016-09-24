@@ -157,7 +157,7 @@ $   myweather -c
 
 
 ## Full Configuration
-You are allowed to combine one location argument with one weather type argument
+* You are allowed to combine one location argument with one weather type argument
 ```
 ./weather -c --t
 
@@ -167,3 +167,4 @@ You are allowed to combine one location argument with one weather type argument
 
 etc etc etc...
 ```
+* You _cannot_ combine any arguments with `--help` or `--alias` (the only argument allowed with `alias` is the alias name you want to use)
