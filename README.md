@@ -13,7 +13,7 @@ $  ./weather
 ===== Boston MA =====
 Light Rain
 58.3 F (14.6 C)
-Feels Like 58.3deg
+Feels Like 58.3 F
 Humidity: 85%
 ```
 
@@ -114,7 +114,7 @@ Enter Zip Code:
 ===== Boston MA =====
 Light Rain
 58.3 F (14.6 C)
-Feels Like 58.3deg
+Feels Like 58.3 F
 Humidity 85%
 ```
 
@@ -131,7 +131,7 @@ Enter Two-Letter State (or country, if not in US) Abbreviation:
 ===== San Francisco CA =====
 Mostly Sunny
 75 F (23.8 C)
-Feels like 75deg
+Feels like 75 F
 Humidity: 67%
 ```
 
