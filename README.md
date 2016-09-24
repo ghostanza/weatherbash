@@ -62,7 +62,7 @@ _Example:_
 $   ./weather -c
 
 
-		----- FULL FORECAST FOR SOMERVILLE -----
+		----- FULL FORECAST FOR BOSTON -----
 
 = S A T U R D A Y  =======================
 Mainly sunny. High 68F. Winds NNW at 10 to 15 mph.
