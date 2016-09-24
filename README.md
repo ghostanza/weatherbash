@@ -139,6 +139,7 @@ Humidity: 67%
 
 #### `--alias [name]` - Create alias
 This command creates an alias for the script in your `.bash_profile`. It takes an optional `name` - the default name it uses is `weather`.
+
 _Example:_
 ```
 $   ./weather --alias myweather
