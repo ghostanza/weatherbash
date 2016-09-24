@@ -1,6 +1,6 @@
 # weatherbash
 
-This script connects to the Weather Underground API to bring weather forecasts to your command line.
+This shell script connects to the Weather Underground API to bring weather forecasts to your command line.
 
 ## Basic Usage
 * At the top of the script file there is a `loc` variable, this will be the location used by default when a location is not specified.
