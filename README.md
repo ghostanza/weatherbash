@@ -61,30 +61,32 @@ _Example:_
 ```
 $   ./weather -c
 
------ FULL FORECAST FOR SAN FRANCISCO -----
-===== Friday =====
-Partly cloudy. Lows overnight in the mid 50s.
 
-===== Friday Night =====
-Partly cloudy skies. Low around 55F. Winds NW at 10 to 20 mph.
+		----- FULL FORECAST FOR SOMERVILLE -----
 
-===== Saturday =====
-A mainly sunny sky. High 73F. Winds NNE at 5 to 10 mph becoming W and increasing to 10 to 20 mph.
+= S A T U R D A Y  =======================
+Mainly sunny. High 68F. Winds NNW at 10 to 15 mph.
 
-===== Saturday Night =====
-Clear skies. Low near 55F. Winds NNE at 10 to 15 mph.
+= S A T U R D A Y   N I G H T  =======================
+Clear skies. Low 44F. Winds NW at 10 to 15 mph.
 
-===== Sunday =====
-Mainly sunny. High 82F. Winds NNE at 10 to 20 mph.
+= S U N D A Y  =======================
+Sunny. High 64F. Winds NW at 10 to 20 mph.
 
-===== Sunday Night =====
-A mostly clear sky. Low around 55F. Winds NW at 10 to 15 mph.
+= S U N D A Y   N I G H T  =======================
+Clear. Low 41F. Winds NW at 5 to 10 mph.
 
-===== Monday ======
-Sunny. High 82F. NE winds shifting to WNW at 10 to 15mph.
+= M O N D A Y  =======================
+Sunshine and some clouds. High near 65F. Winds SSW at 5 to 10 mph.
 
-===== Monday Night =====
-A mostly clear sky. Low around 55F. Winds W at 5 to 10 mph.
+= M O N D A Y   N I G H T  =======================
+Partly cloudy in the evening. Increasing clouds with periods of showers after midnight. Low 51F. Winds S at 10 to 15 mph. Chance of rain 60%.
+
+= T U E S D A Y  =======================
+Rain showers early with some sunshine later in the day. High 69F. Winds SW at 10 to 20 mph. Chance of rain 50%.
+
+= T U E S D A Y   N I G H T  =======================
+A few clouds from time to time. Low 54F. Winds SW at 10 to 15 mph.
 ```
 
 ---
