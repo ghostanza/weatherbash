@@ -143,7 +143,7 @@ _Example:_
 ```
 $   ./weather --alias myweather
 
-    Successfully created an alias named 'myweather' to bash_profile
+    Successfully added an alias named 'myweather' to ~/.bash_profile
     Now just run 'source ~/.bash_profile' to make it official!
 ```
 
