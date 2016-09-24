@@ -147,6 +147,13 @@ $   ./weather --alias myweather
     Now just run 'source ~/.bash_profile' to make it official!
 ```
 
+Now you should be able to run the shell script from anywhere just by using your new alias
+_Example:_
+```
+$   myweather -c
+```
+
+
 ## Full Configuration
 You are allowed to combine one location argument with one weather type argument
 ```
