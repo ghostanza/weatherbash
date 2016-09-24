@@ -5,7 +5,7 @@ This script connects to the Weather Underground API to bring weather forecasts t
 ## Basic Usage
 * At the top of the script file there is a `loc` variable, this will be the location used by default when a location is not specified.
 * You will need to use your own Weather Underground API key and set it as the `weather_key` value at the top of the script.
-* The default display from calling `./weather` displays your default location, a brief message about the weather, the temperature, and the "feels like" temperature
+* The default display from calling `./weather` displays your default location, a brief message about the weather, the temperature, the "feels like" temperature, and the humidity.`
 
 ```
 $  ./weather
@@ -14,6 +14,7 @@ $  ./weather
 Light Rain
 58.3 F (14.6 C)
 Feels Like 58.3deg
+Humidity: 85%
 ```
 
 
@@ -114,6 +115,7 @@ Enter Zip Code:
 Light Rain
 58.3 F (14.6 C)
 Feels Like 58.3deg
+Humidity 85%
 ```
 
 #### City/State Flag
@@ -130,6 +132,7 @@ Enter Two-Letter State (or country, if not in US) Abbreviation:
 Mostly Sunny
 75 F (23.8 C)
 Feels like 75deg
+Humidity: 67%
 ```
 
 ---
