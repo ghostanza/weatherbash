@@ -3,9 +3,9 @@
 This script connects to the Weather Underground API to bring weather forecasts to your command line.
 
 ## Basic Usage
-* The script has a default `loc` variable, this will be used by default.
+* At the top of the script file there is a `loc` variable, this will be the location used by default when a location is not specified.
 * You will need to use your own Weather Underground API key and set it as the `weather_key` value at the top of the script.
-* The default display from calling `./weather` displays your location, a brief message about the weather, the temperature, and the "feels like" temperature
+* The default display from calling `./weather` displays your default location, a brief message about the weather, the temperature, and the "feels like" temperature
 
 ```
 $  ./weather
@@ -17,7 +17,7 @@ Feels Like 58.3deg
 ```
 
 ## Custom Location
-There are two different ways you can specify what location you'd like to use on the fly (aside from changing the default location in the script itself).
+If you want to check the weather for a location other than your default location, there are two options.
 
 #### Zip Code Flag
 By calling the script with the `--z` argument, you will be prompted to put in a zip code which will be used in the call.
@@ -144,4 +144,6 @@ You are allowed to combine one location argument with one weather type argument
 
 etc etc etc...
 ```
-
+## NOTES
+* The double-dash (`--`) arguments are helpers/modifies (`--z`, `--t`, `--help`, `--alias`)
+* The single-dash (`-`) arguments are for the weather/display types (`-c`, `-rain`, `-sset`, `-s`).
