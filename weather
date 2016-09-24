@@ -79,12 +79,12 @@ then
    fulldata=$(curl -s ${api_prefix}forecast/q/${loc}.json | sed -e 's@[",{}]@@g');
    find_town=$(curl -s ${api_prefix}geolookup/q/${loc}.json | sed -e 's@[",{}]@@g');
    town=$(echo -e "$find_town" | grep -m1 "city\:" | cut -d ":" -f2 | awk '{print toupper($0)}');
-   echo -e "\n\t----- FULL FORECAST FOR $town -----\n";
+   echo -e "\n\t\t----- FULL FORECAST FOR $town -----\n";
    echo -e "\n$fulldata" | grep "title\|fcttext\:" | while read -r line; do
       if [[ "$line" =~ "title" ]]
       then
-         text=$(echo -e "$line" | cut -d ':' -f2); 
-         echo -e "======= $text =======";
+         text=$(echo -e "$line" | cut -d ':' -f2 | awk '{print toupper($0)}' | sed -e 's@.@& @g'); 
+         echo -e "= $text =======================";
       else
          text=$(echo -e "$line" | cut -d ':' -f2);
          echo -e "$text\n";
