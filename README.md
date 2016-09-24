@@ -16,38 +16,6 @@ Light Rain
 Feels Like 58.3deg
 ```
 
-## Custom Location
-If you want to check the weather for a location other than your default location, there are two options.
-
-#### Zip Code Flag
-By calling the script with the `--z` argument, you will be prompted to put in a zip code which will be used in the call.
-_Example:_
-```
-$   ./weather --z
-Enter Zip Code:
-> 02108
-
-===== Boston MA =====
-Light Rain
-58.3 F (14.6 C)
-Feels Like 58.3deg
-```
-
-#### City/State Flag
-By calling the script with the `--t` argument, you will be prompted to enter a town name and then a state or country abbreviation.
-_Example:_
-```
-$    ./weather --t
-Enter Town/City Name;
-> San Francisco
-Enter Two-Letter State (or country, if not in US) Abbreviation:
-> CA
-
-===== San Francisco CA =====
-Mostly Sunny
-75 F (23.8 C)
-Feels like 75deg
-```
 
 ## Options
 #### `-s` - Summary
@@ -123,6 +91,47 @@ $    ./weather -rain
 
 ---
 
+## Helpers/Modifiers
+
+### `--help` - Display the documentation
+
+---
+
+### Custom Location
+If you want to check the weather for a location other than your default location, there are two options.
+
+#### Zip Code Flag
+By calling the script with the `--z` argument, you will be prompted to put in a zip code which will be used in the call.
+_Example:_
+```
+$   ./weather --z
+Enter Zip Code:
+> 02108
+
+===== Boston MA =====
+Light Rain
+58.3 F (14.6 C)
+Feels Like 58.3deg
+```
+
+#### City/State Flag
+By calling the script with the `--t` argument, you will be prompted to enter a town name and then a state or country abbreviation.
+_Example:_
+```
+$    ./weather --t
+Enter Town/City Name;
+> San Francisco
+Enter Two-Letter State (or country, if not in US) Abbreviation:
+> CA
+
+===== San Francisco CA =====
+Mostly Sunny
+75 F (23.8 C)
+Feels like 75deg
+```
+
+---
+
 #### `--alias [name]` - Create alias
 This command creates an alias for the script in your `.bash_profile`. It takes an optional `name` - the default name it uses is `weather`.
 _Example:_
@@ -144,6 +153,3 @@ You are allowed to combine one location argument with one weather type argument
 
 etc etc etc...
 ```
-## NOTES
-* The double-dash (`--`) arguments are helpers/modifies (`--z`, `--t`, `--help`, `--alias`)
-* The single-dash (`-`) arguments are for the weather/display types (`-c`, `-rain`, `-sset`, `-s`).
