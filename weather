@@ -9,7 +9,7 @@ then
 This script can be used to quickly check the weather for a given zipcode from the command line. It uses cURL to reach out to the Weather Uderground API to provide information\n
     DEFAULTS:
     -> The default location is Somerville, MA
-    -> The default display is a brief overview showing the weather ("Cloudy / Rainy / etc", and the temperature)
+    -> The default display is a brief overview showing the weather ("Cloudy / Rainy / etc", the temperature, and humidity)
 
     OPTIONS:\n
     [-s] - Summary (This is the default, you do not need to use the argument)\n
@@ -30,6 +30,7 @@ This script can be used to quickly check the weather for a given zipcode from th
     \t\t  Light Rain
     \t\t  58.3 F (14.6 C)
     \t\t  Feels Like 58.3deg\n
+    \t\t  Humidity: 85%\n
 
     \t $ weather --t -c
     \t $ Enter Town/City Name:
@@ -156,9 +157,11 @@ else
    temperature=$(echo -e "\n$weatherdata" | grep -m1 temperature_string | cut -d ':' -f2);
    feelslike=$(echo -e "\n$weatherdata" | grep -m1 feelslike_f | cut -d ':' -f2);
    weather=$(echo -e "\n$weatherdata" | grep -m1 weather\: | cut -d ':' -f2);
+   humidity=$(echo -e "\n$weatherdata" | grep -m1 relative_humidity\: | cut -d ':' -f2);
 
    echo -e "\n\t======= $location =======\n
 \t$weather\n
 \t$temperature\n
-\tFeels Like ${feelslike}deg\n";
+\tFeels Like ${feelslike} F\n
+\tHumidity: ${humidity}%\n";
 fi
