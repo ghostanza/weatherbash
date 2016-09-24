@@ -53,6 +53,8 @@ Feels like 75deg
 #### `-s` - Summary
 This is the default setting ( you do not need to use the flag )
 
+---
+
 #### `-c` - Complete Forecast
 This will give you a 3-day/night forecast for the location
 _Example:_
