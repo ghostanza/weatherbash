@@ -100,7 +100,7 @@ then
         if [ -z "$found_alias" ]
         then
            echo -e "alias weather=\"/bin/bash ${filename}\";" >> ~/.bash_profile;
-           echo -e "\n Successfully created alias named 'weather' to bash_profile\n Now just run 'source ~/.bash_profile' to make it official!\n";
+           echo -e "\n Successfully added an alias named 'weather' to ~/.bash_profile\n Now just run 'source ~/.bash_profile' to make it official!\n";
         else
            echo -e "\nWHOOPS!  It looks like you've already created an alias for this named 'weather'\n";
            exit;
@@ -112,7 +112,7 @@ then
         then
             echo -e "alias ${alias_name}=\"/bin/bash ${filename}\";" >> ~/.bash_profile;
             source ~/.bash_profile;
-            echo -e "\n Successfully created an alias named '${alias_name}' to bash_profile\n Now just run 'source ~/.bash_profile' to make it official!\n";
+            echo -e "\n Successfully added an alias named '${alias_name}' to ~/.bash_profile\n Now just run 'source ~/.bash_profile' to make it official!\n";
         else
             echo -e "\nWHOOPS! It looks like you've already created an alias with the same name [ ${alias_name} ]";
             exit;
