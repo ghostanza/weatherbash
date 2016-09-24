@@ -148,6 +148,7 @@ $   ./weather --alias myweather
 ```
 
 Now you should be able to run the shell script from anywhere just by using your new alias
+
 _Example:_
 ```
 $   myweather -c
