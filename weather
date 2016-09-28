@@ -148,9 +148,6 @@ then
    today=$(echo -e "$chanceofrain" | sed -n "1p");
    tonight=$(echo -e "$chanceofrain" | sed -n "2p");
    echo -e "\tToday: ${today}%\t\t\tTonight: ${tonight}%\n";
-elif [ ! -z "$1" ] && [[ "$1" != "-s" ]]
-then
-    echo -e "\n\tInvalid argument. Use [--help] to see list of possible options\n";
 else
    weatherdata=$(curl -s ${api_prefix}conditions/q/${loc}.json | sed -e 's@[",{}]@@g');
    location=$(echo -e "\n$weatherdata" | grep -m1 full | cut -d ':' -f2);
